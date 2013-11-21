@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+echo "
+---
+addons: ~
+config_vars: ~
+default_process_types:
+  web: \".conda/bin/ipython notebook --port \$PORT\"
+"

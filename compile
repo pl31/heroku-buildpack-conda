@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+ROOT=$1
+CACHE=$2
+
+BASH=$(which bash)
+CONDA_HOME="$1/.conda"
+CONDA_BIN="$CONDA_HOME/bin"
+MINICONDA_CACHE="$CACHE/miniconda.sh"
+MINICONDA_URI='http://repo.continuum.io/miniconda/Miniconda3-2.0.3-MacOSX-x86_64.sh'
+
+echo "-----> Preparing Python Environment..."
+if [ ! -e $MINICONDA_CACHE ] ; then
+	wget -q -O $MINICONDA_CACHE $MINICONDA_URI
+	chmod +x $MINICONDA_CACHE
+fi
+if [ -e $CONDA_HOME ]; then rm -rf $CONDA_HOME; fi
+$MINICONDA_CACHE -b -p $CONDA_HOME &> /dev/null
+
+echo "-----> Installing Dependencies..."
+$CONDA_BIN/conda update --yes --quiet conda &> /dev/null
+$CONDA_BIN/conda install --yes --quiet ipython-notebook &> /dev/null
+if [ -e "$ROOT/requirements.txt" ]; then
+	$CONDA_BIN/conda install --yes --quiet --file "$ROOT/requirements.txt" &> /dev/null
+fi
+
+grep -rlI $(pwd) . | xargs sed -ie "s|$(pwd)|.|g"
