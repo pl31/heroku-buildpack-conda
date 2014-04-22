@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+echo "-----> Starting compile step..."
 ROOT=$1
 CACHE=$2
 
