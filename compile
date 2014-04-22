@@ -7,7 +7,8 @@ BASH=$(which bash)
 CONDA_HOME="$1/.conda"
 CONDA_BIN="$CONDA_HOME/bin"
 MINICONDA_CACHE="$CACHE/miniconda.sh"
-MINICONDA_URI='http://repo.continuum.io/miniconda/Miniconda3-2.0.3-MacOSX-x86_64.sh'
+MINICONDA_URI='http://repo.continuum.io/miniconda/Miniconda-3.3.0-Linux-x86_64.sh'
+
 
 echo "-----> Preparing Python Environment..."
 if [ ! -e $MINICONDA_CACHE ] ; then
