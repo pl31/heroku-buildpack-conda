@@ -7,8 +7,10 @@ BASH=$(which bash)
 WGET=$(which wget)
 CONDA_HOME="$1/.conda"
 CONDA_BIN="$CONDA_HOME/bin"
-MINICONDA_CACHE="$CACHE/miniconda.sh"
-MINICONDA_URI='http://repo.continuum.io/miniconda/Miniconda-3.3.0-Linux-x86_64.sh'
+
+MINICONDA_FILE="Miniconda-3.3.0-Linux-x86_64.sh"
+MINICONDA_URI="http://repo.continuum.io/miniconda/$MINICONDA_FILE"
+MINICONDA_CACHE="$CACHE/$MINICONDA_FILE"
 
 echo "------------------"
 echo "- BASH: $BASH"
@@ -19,8 +21,10 @@ echo "------------------"
 echo "-----> Preparing Python Environment..."
 if [ ! -e $MINICONDA_CACHE ] ; then
 	echo "-----> Downloading Miniconda..."
-	$WGET -v -O $MINICONDA_CACHE $MINICONDA_URI
-	chmod +x $MINICONDA_CACHE
+	cd $CACHE
+	$WGET -q $MINICONDA_URI
+	chmod +x $MINICONDA_FILE
+	cd $ROOT
 fi
 if [ -e $CONDA_HOME ]; then rm -rf $CONDA_HOME; fi
 $MINICONDA_CACHE -b -p $CONDA_HOME &> /dev/null
