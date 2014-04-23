@@ -12,7 +12,7 @@ MINICONDA_URI='http://repo.continuum.io/miniconda/Miniconda-3.3.0-Linux-x86_64.s
 
 echo "-----> Preparing Python Environment..."
 if [ ! -e $MINICONDA_CACHE ] ; then
-	wget -q -O $MINICONDA_CACHE $MINICONDA_URI
+	wget -O $MINICONDA_CACHE $MINICONDA_URI
 	chmod +x $MINICONDA_CACHE
 fi
 if [ -e $CONDA_HOME ]; then rm -rf $CONDA_HOME; fi
