@@ -32,7 +32,11 @@ echo "-----> Installing Dependencies..."
 $CONDA_BIN/conda update --yes conda #&> /dev/null
 $CONDA_BIN/conda install --yes ipython-notebook #&> /dev/null
 if [ -e "$ROOT/requirements.txt" ]; then
+    echo "-----> Installing additional requirements..."
 	$CONDA_BIN/conda install --yes --file "$ROOT/requirements.txt" &> /dev/null
 fi
 
+echo "-----> Changing hardcoded paths..."
+echo "Current PWD=$(pwd)"
+grep -rlI $(pwd) .
 grep -rlI $(pwd) . | xargs sed -ie "s|$(pwd)|.|g"
