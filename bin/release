@@ -5,5 +5,5 @@ echo "
 addons: ~
 config_vars: ~
 default_process_types:
-  web: \".conda/bin/ipython notebook --port \$PORT\"
+  web: echo $PWD; .conda/bin/ipython notebook --port \$PORT
 "
