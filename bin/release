@@ -4,6 +4,6 @@ echo "
 ---
 addons: ~
 config_vars: ~
-default_process_type:
+default_process_types:
   web: .conda/bin/ipython notebook --no-browser --port \$PORT
 "
