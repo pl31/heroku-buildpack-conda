@@ -38,5 +38,5 @@ fi
 
 echo "-----> Changing hardcoded paths..."
 echo "Current PWD=$(pwd)"
-grep -rlI $(pwd) .
-grep -rlI $(pwd) . | xargs sed -ie "s|$(pwd)|.|g"
+grep -rlI $ROOT .
+grep -rlI $ROOT . | xargs sed -ie "s|$ROOT|.|g"
