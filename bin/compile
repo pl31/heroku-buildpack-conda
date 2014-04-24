@@ -21,10 +21,9 @@ echo "------------------"
 echo "-----> Preparing Python Environment..."
 if [ ! -e $MINICONDA_CACHE ] ; then
 	echo "-----> Downloading Miniconda..."
-	cd $CACHE
-	$WGET -q $MINICONDA_URI
-	chmod +x $MINICONDA_FILE
-	cd $ROOT
+    mkdir $CACHE
+	$WGET -q -O $MINICONDA_CACHE $MINICONDA_URI
+	chmod +x $MINICONDA_CACHE
 fi
 if [ -e $CONDA_HOME ]; then rm -rf $CONDA_HOME; fi
 $MINICONDA_CACHE -b -p $CONDA_HOME &> /dev/null
