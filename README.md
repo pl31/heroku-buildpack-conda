@@ -7,7 +7,7 @@ To use this buildpack specify the URI of the repository when pushing an IPython 
 
     cf push --buildpack https://github.com/gopivotal/ipython-notebook-buildpack.git
 
-As the IPython notebook uses Websockets you must access it on Cloud Foundry using port 4443, e.g. https://<app-subdomain>.cfapps.io:4443
+As the IPython notebook uses Websockets you must access it on Cloud Foundry using port 4443, e.g. https://app-subdomain.cfapps.io:4443
 
 
 ## Notebook Dependencies
