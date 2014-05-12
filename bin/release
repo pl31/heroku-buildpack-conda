@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
+if [ -e $1/additional_notebook_config.py ]
+then
+    with_config="--config=$1/additional_notebook_config.py"
+fi
+
 echo "
 ---
 addons: ~
 config_vars: ~
 default_process_types:
-  web: .conda/bin/ipython notebook --no-browser --ip=* --port \$PORT
+  web: .conda/bin/ipython notebook --no-browser --ip=* --port \$PORT $with_config
 "
