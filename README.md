@@ -14,7 +14,7 @@ As the IPython notebook uses Websockets you must access it on Cloud Foundry usin
 The buildpack supports dependencies declaration using a `requirements.txt` file located in the root of the directory being pushed to Cloud Foundry.
 
 ## Notebook Config
-Additional notebook configuration can be specified using a file name `additional_notebook_config.py` in the root of the app directory.
+Additional notebook configuration can be specified using a file named `additional_notebook_config.py` in the root of the app directory.
 
 In particular you can password protect your notebook server by creating a SHA1 hash of your password and adding this to the config file as follows:
 
