@@ -32,3 +32,8 @@ fi
 
 echo "-----> Changing hardcoded paths..."
 grep -rlI $ROOT . | xargs sed -ie "s|$ROOT|.|g"
+
+if [ -e "$ROOT/additional_notebook_config.py" ]
+then
+	echo "-----> Additional IPython configuration file detected"
+fi
