@@ -15,7 +15,7 @@ MINICONDA_CACHE="$CACHE/$MINICONDA_FILE"
 echo "-----> Preparing Python Environment..."
 if [ ! -e $MINICONDA_CACHE ] ; then
 	echo "-----> Downloading Miniconda..."
-    #mkdir $CACHE
+	if [ ! -d $CACHE ]; then mkdir $CACHE; fi
 	$WGET -q -O $MINICONDA_CACHE $MINICONDA_URI
 	chmod +x $MINICONDA_CACHE
 fi
