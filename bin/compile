@@ -16,7 +16,7 @@ echo "-----> Preparing Python Environment..."
 if [ ! -e $MINICONDA_CACHE ] ; then
 	echo "-----> Downloading Miniconda..."
 	if [ ! -d $CACHE ]; then mkdir $CACHE; fi
-	$WGET -q -O $MINICONDA_CACHE $MINICONDA_URI
+	$WGET -O $MINICONDA_CACHE $MINICONDA_URI
 	chmod +x $MINICONDA_CACHE
 fi
 if [ -e $CONDA_HOME ]; then rm -rf $CONDA_HOME; fi
@@ -29,10 +29,10 @@ if [ -e "$ROOT/requirements.txt" ]; then
     echo "-----> Installing additional requirements..."
 	$CONDA_BIN/conda install --yes --quiet --file "$ROOT/requirements.txt" #&> /dev/null
 fi
-
+#
 echo "-----> Changing hardcoded paths..."
-grep -rlI $ROOT . | xargs sed -ie "s|$ROOT|.|g"
-
+grep -rlI $ROOT . | xargs sed -i.bak "s|$ROOT|.|g"
+#
 if [ -e "$ROOT/additional_notebook_config.py" ]
 then
 	echo "-----> Additional IPython configuration file detected"

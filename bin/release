@@ -6,9 +6,6 @@ then
 fi
 
 echo "
----
-addons: ~
-config_vars: ~
 default_process_types:
-  web: .conda/bin/ipython notebook --no-browser --no-mathjax --ip=* --port \$PORT $with_config
+  web: ./.conda/bin/ipython notebook --no-browser --no-mathjax --ip=* --port \$PORT $with_config
 "
