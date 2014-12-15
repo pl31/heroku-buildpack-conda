@@ -7,12 +7,15 @@ To use this buildpack specify the URI of the repository when pushing an IPython 
 
     cf push --buildpack https://github.com/p-a-c-o/ipython-notebook-buildpack.git
 
-This buildpack uses python 3.x. If you need python 2.x use
-
-    cf push --buildpack https://github.com/ihuston/ipython-notebook-buildpack.git
-
 As the IPython notebook uses Websockets you must access it on Cloud Foundry using port 4443, e.g. https://app-subdomain.cfapps.io:4443
 
+## Runtime
+
+Create a file named `runtime.txt` containing the Miniconda version you wish to use as runtime. Otherwise `Miniconda-latest-Linux-x86_64.sh` (python 2.x) will be used.
+
+Find different runtimes here: http://repo.continuum.io/miniconda/
+
+Use `Miniconda3-3.7.3-Linux-x86_64.sh` for python 3.x support.
 
 ## Notebook Dependencies
 The buildpack supports dependencies declaration using a `requirements.txt` file located in the root of the directory being pushed to Cloud Foundry.
