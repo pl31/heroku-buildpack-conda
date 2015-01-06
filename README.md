@@ -9,9 +9,9 @@ To use this buildpack specify the URI of the repository when pushing an IPython 
 
 As the IPython notebook uses Websockets you must access it on Cloud Foundry using port 4443, e.g. https://app-subdomain.cfapps.io:4443
 
-## Runtime
+## Conda Version
 
-Create a file named `runtime.txt` containing the Miniconda version you wish to use as runtime. Otherwise `Miniconda-latest-Linux-x86_64.sh` (python 2.x) will be used.
+Create a file named `conda_runtime.txt` containing the Miniconda version you wish to use as conda-runtime. Otherwise `Miniconda-latest-Linux-x86_64.sh` (python 2.x) will be used.
 
 Find different runtimes here: http://repo.continuum.io/miniconda/
 
