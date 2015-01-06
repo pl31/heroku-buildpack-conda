@@ -26,5 +26,8 @@ In particular you can password protect your notebook server by creating a SHA1 h
 See [the IPython documentation](http://ipython.org/ipython-doc/stable/notebook/public_server.html) for further
 instructions and more configuration options for the server.
 
+## License
+This buildpack is released under version 2.0 of the [Apache License](http://www.apache.org/licenses/LICENSE-2.0).
+
 [Cloud Foundry]: http://www.cloudfoundry.com
 [IPython Notebook]: http://ipython.org/notebook.html
