@@ -50,7 +50,7 @@ if [ -e "$ROOT/requirements.txt" ]; then
 	    $CONDA_BIN/conda install --yes --quiet $p #&> /dev/null
 	done <"$ROOT/requirements.txt"
     echo "-----> Installing additional requirements using pip..."
-	$CONDA_BIN/pip -q -r "$ROOT/requirements.txt"
+	$CONDA_BIN/pip -q "$ROOT/requirements.txt"
 fi
 #
 echo "-----> Changing hardcoded paths..."
