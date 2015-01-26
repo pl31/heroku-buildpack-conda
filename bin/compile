@@ -43,10 +43,14 @@ $MINICONDA_CACHE -b -p $CONDA_HOME #&> /dev/null
 
 echo "-----> Installing Dependencies..."
 $CONDA_BIN/conda update --yes --quiet conda #&> /dev/null
-$CONDA_BIN/conda install --yes --quiet ipython-notebook #&> /dev/null
+$CONDA_BIN/conda install --yes --quiet pip ipython-notebook #&> /dev/null
 if [ -e "$ROOT/requirements.txt" ]; then
-    echo "-----> Installing additional requirements..."
-	$CONDA_BIN/conda install --yes --quiet --file "$ROOT/requirements.txt" #&> /dev/null
+    echo "-----> Installing additional requirements using conda..."
+	while read p; do 
+	    $CONDA_BIN/conda install --yes --quiet $p #&> /dev/null
+	done <"$ROOT/requirements.txt"
+    echo "-----> Installing additional requirements using pip..."
+	$CONDA_BIN/pip install -r "$ROOT/requirements.txt"
 fi
 #
 echo "-----> Changing hardcoded paths..."
