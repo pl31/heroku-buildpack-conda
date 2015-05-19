@@ -14,13 +14,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-ROOT=$1
-
-HAS_FILES=$(find $ROOT -depth 1 -name '*.ipynb' | wc -l)
-
-if [ "$HAS_FILES" -gt "0" ]; then
-	echo "ipython-notebook"
-	exit 0
-else
-	exit 1
-fi
+exit 0
