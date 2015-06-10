@@ -16,10 +16,10 @@
 #
 if [ -e "$1/additional_notebook_config.py" ]
 then
-    with_config="--config=/home/vcap/additional_notebook_config.py"
+    with_config="--config=/home/vcap/app/additional_notebook_config.py"
 fi
 
 echo "
 default_process_types:
-  web: /home/vcap/.conda/bin/ipython notebook --no-browser --no-mathjax --ip=* --port \$PORT $with_config
+  web: /home/vcap/app/.conda/bin/ipython notebook --no-browser --no-mathjax --ip=* --port \$PORT $with_config
 "
