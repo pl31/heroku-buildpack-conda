@@ -39,6 +39,7 @@ if [ ! -e $MINICONDA_CACHE ] ; then
 	chmod +x $MINICONDA_CACHE
 fi
 if [ -e $CONDA_HOME ]; then rm -rf $CONDA_HOME; fi
+echo Installing anaconda to $CONDA_HOME
 $MINICONDA_CACHE -b -p $CONDA_HOME #&> /dev/null
 $CONDA_BIN/conda update --yes --quiet --all #&> /dev/null
 $CONDA_BIN/conda install --yes --quiet pip #&> /dev/null
