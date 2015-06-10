@@ -67,6 +67,7 @@ $CONDA_BIN/pip list
 echo "-----> Copy to staging area"
 CONDA_TARGET="$1/.conda"
 if [ -e $CONDA_TARGET ]; then rm -rf $CONDA_TARGET; fi
-cp -r $CONDA_HOME/* $CONDA_TARGET
+mkdir -p $CONDA_TARGET
+cp -r $CONDA_HOME/* $CONDA_TARGET/
 
 echo "-----> Finished compile step"
