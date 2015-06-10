@@ -63,13 +63,4 @@ $CONDA_BIN/conda list
 echo "---> pip list"
 $CONDA_BIN/pip list
 
-#
-echo "-----> Changing hardcoded paths..."
-grep -rlI $ROOT . | xargs sed -i.bak "s|$ROOT|.|g"
-#
-if [ -e "$ROOT/additional_notebook_config.py" ]
-then
-	echo "-----> Additional IPython configuration file detected"
-fi
-
 echo "-----> Finished compile step"
