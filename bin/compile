@@ -24,7 +24,7 @@ CONDA_HOME="$1/.conda"
 CONDA_BIN="$CONDA_HOME/bin"
 
 if [ ! -e "$ROOT/conda_runtime.txt" ]; then
-	MINICONDA_FILE="Miniconda-latest-Linux-x86_64.sh"
+	MINICONDA_FILE="Miniconda3-latest-Linux-x86_64.sh"
 else
 	MINICONDA_FILE=$(cat "$ROOT/conda_runtime.txt")
 fi
