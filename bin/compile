@@ -20,7 +20,7 @@ CACHE=$2
 
 BASH=$(which bash)
 WGET=$(which wget)
-CONDA_HOME="$1/.conda"
+CONDA_HOME="/home/vcap/app/.conda"
 CONDA_BIN="$CONDA_HOME/bin"
 
 if [ ! -e "$ROOT/conda_runtime.txt" ]; then
@@ -63,5 +63,8 @@ echo "---> conda list"
 $CONDA_BIN/conda list
 echo "---> pip list"
 $CONDA_BIN/pip list
+
+echo "-----> Copy to staging area"
+cp -r $CONDA_HOME/* "$1/.conda"
 
 echo "-----> Finished compile step"
