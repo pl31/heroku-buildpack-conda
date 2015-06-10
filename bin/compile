@@ -57,6 +57,12 @@ fi
 echo "-----> Cleaning Python Environment..."
 $CONDA_BIN/conda clean --yes --tarballs
 
+echo "-----> Listing Python Environment Information..."
+echo "---> conda list"
+$CONDA_BIN/conda list
+echo "---> pip list"
+$CONDA_BIN/pip list
+
 #
 echo "-----> Changing hardcoded paths..."
 grep -rlI $ROOT . | xargs sed -i.bak "s|$ROOT|.|g"
