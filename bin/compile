@@ -21,7 +21,9 @@ CACHE=$2
 BASH=$(which bash)
 WGET=$(which wget)
 CONDA_HOME="/home/vcap/app/.conda"
-CONDA_BIN="$CONDA_HOME/bin"
+CONDA="$CONDA_HOME/bin/conda"
+PIP="$CONDA_HOME/bin/pip"
+CONDA_STAGING="$1/.conda"
 
 if [ ! -e "$ROOT/conda_runtime.txt" ]; then
 	MINICONDA_FILE="Miniconda3-latest-Linux-x86_64.sh"
@@ -41,33 +43,32 @@ fi
 if [ -e $CONDA_HOME ]; then rm -rf $CONDA_HOME; fi
 echo Installing anaconda to $CONDA_HOME
 $MINICONDA_CACHE -b -p $CONDA_HOME #&> /dev/null
-$CONDA_BIN/conda update --yes --quiet --all #&> /dev/null
-$CONDA_BIN/conda install --yes --quiet pip #&> /dev/null
+$CONDA update --yes --quiet --all #&> /dev/null
+$CONDA install --yes --quiet pip #&> /dev/null
 
 echo "-----> Installing Dependencies..."
-$CONDA_BIN/conda install --yes --quiet ipython-notebook #&> /dev/null
+$CONDA install --yes --quiet ipython-notebook #&> /dev/null
 if [ -e "$ROOT/requirements.txt" ]; then
     echo "-----> Installing additional requirements using conda..."
 	while read p; do 
-	    $CONDA_BIN/conda install --yes --quiet $p #&> /dev/null
+	    $CONDA install --yes --quiet $p #&> /dev/null
 	done <"$ROOT/requirements.txt"
     echo "-----> Installing additional requirements using pip..."
-	$CONDA_BIN/pip install -r "$ROOT/requirements.txt"
+	$PIP install -r "$ROOT/requirements.txt"
 fi
 
 echo "-----> Cleaning Python Environment..."
-$CONDA_BIN/conda clean --yes --tarballs
+$CONDA clean --yes --tarballs
 
 echo "-----> Listing Python Environment Information..."
 echo "---> conda list"
-$CONDA_BIN/conda list
+$CONDA list
 echo "---> pip list"
-$CONDA_BIN/pip list
+$PIP list
 
 echo "-----> Copy to staging area"
-CONDA_TARGET="$1/.conda"
-if [ -e $CONDA_TARGET ]; then rm -rf $CONDA_TARGET; fi
-mkdir -p $CONDA_TARGET
-cp -r $CONDA_HOME/* $CONDA_TARGET/
+if [ -e $CONDA_STAGING ]; then rm -rf $CONDA_STAGING; fi
+mkdir -p $CONDA_STAGING
+cp -r $CONDA_HOME/* $CONDA_STAGING/
 
 echo "-----> Finished compile step"
