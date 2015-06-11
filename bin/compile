@@ -20,7 +20,7 @@ CACHE=$2
 
 BASH=$(which bash)
 WGET=$(which wget)
-CONDA_HOME="$HOME/.conda"
+CONDA_HOME="$HOME/app/.conda"
 CONDA="$CONDA_HOME/bin/conda"
 PIP="$CONDA_HOME/bin/pip"
 CONDA_STAGING="$1/.conda"
