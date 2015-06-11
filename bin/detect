@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-ROOT=/home/vcap/app
+ROOT=$1
 
 HAS_FILES=$(find $ROOT -depth 1 -name '*.ipynb' | wc -l)
 
