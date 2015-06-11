@@ -16,8 +16,6 @@
 #
 ROOT=$1
 
-echo "#### find $ROOT -depth 1 -name '*.ipynb' | wc -l"
-
 HAS_FILES=$(find $ROOT -depth 1 -name '*.ipynb' | wc -l)
 
 if [ "$HAS_FILES" -gt "0" ]; then
