@@ -5,7 +5,7 @@ The `ipython-notebook-buildpack` is a [Cloud Foundry][] buildpack for exposing [
 ## Usage
 To use this buildpack specify the URI of the repository when pushing an IPython Notebook file (or directory of files) to Cloud Foundry.
 
-    cf push --buildpack https://github.com/p-a-c-o/ipython-notebook-buildpack.git
+    cf push --buildpack <https clone url>
 
 As the IPython notebook uses Websockets you must access it on Cloud Foundry using port 4443, e.g. https://app-subdomain.cfapps.io:4443
 
