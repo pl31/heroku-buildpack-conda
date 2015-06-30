@@ -18,7 +18,7 @@
 ROOT="/home/vcap/app"
 CONDA_HOME="$ROOT/.conda"
 
-if [ -e "$ROOT/additional_notebook_config.py" ]
+if [ -e "$1/additional_notebook_config.py" ]
 then
     with_config="--config=$ROOT/additional_notebook_config.py"
 fi
