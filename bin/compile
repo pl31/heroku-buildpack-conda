@@ -22,7 +22,6 @@ build=$(cd "$1/" && pwd)
 cache=$(cd "$2/" && pwd)
 
 conda_temp="$HOME/.conda"
-PATH=$PATH:$conda_temp
 
 if [ ! -e "$build/conda_runtime.txt" ]; then
 	conda_runtime="Miniconda3-latest-Linux-x86_64.sh"
@@ -43,6 +42,7 @@ if [ -e $conda_temp ]; then rm -rf $conda_temp; fi
 echo "---> Installing conda to $conda_temp"
 $miniconda_installer -b -p $conda_temp
 rm $miniconda_installer
+export PATH=$PATH:$conda_temp
 
 echo "---> Updating environment"
 conda update --yes --quiet --all
