@@ -43,6 +43,7 @@ chmod +x $MINICONDA_CACHE
 
 echo "---> Delete old files..." 
 if [ -e $CONDA_HOME ]; then rm -rf $CONDA_HOME; fi
+if [ -e $CONDA_STAGING ]; then rm -rf $CONDA_STAGING; fi
 
 echo "---> Installing anaconda to $CONDA_HOME"
 $MINICONDA_CACHE -b -p $CONDA_HOME
@@ -61,13 +62,13 @@ echo "-----> Listing Python Environment Information..."
 echo "---> conda list"
 $CONDA list
 
+echo "-----> Create .profile.d"
+mkdir -p $HOME/.profile.d
+echo 'PATH=$PATH:$CONDA_HOME/bin' > $HOME/.profile.d/conda.sh
+
 echo "-----> Copy to staging area"
 if [ -e $CONDA_STAGING ]; then rm -rf $CONDA_STAGING; fi
 mkdir -p $CONDA_STAGING
 cp -a $CONDA_HOME/* $CONDA_STAGING/
 
 echo "-----> Finished compile step"
-
-echo "-----> Create .profile.d"
-mkdir -p $HOME/.profile.d
-echo 'PATH=$PATH:$CONDA_HOME/bin' > $HOME/.profile.d/conda.sh
