@@ -64,6 +64,6 @@ $CONDA list
 echo "-----> Copy to staging area"
 if [ -e $CONDA_STAGING ]; then rm -rf $CONDA_STAGING; fi
 mkdir -p $CONDA_STAGING
-cp -al $CONDA_HOME/* $CONDA_STAGING/
+cp -a $CONDA_HOME/* $CONDA_STAGING/
 
 echo "-----> Finished compile step"
