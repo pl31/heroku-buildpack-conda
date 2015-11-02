@@ -60,8 +60,6 @@ $CONDA clean --yes --tarballs
 echo "-----> Listing Python Environment Information..."
 echo "---> conda list"
 $CONDA list
-echo "---> pip list"
-$PIP list
 
 echo "-----> Copy to staging area"
 if [ -e $CONDA_STAGING ]; then rm -rf $CONDA_STAGING; fi
