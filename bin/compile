@@ -37,7 +37,7 @@ MINICONDA_CACHE="$CACHE/$MINICONDA_FILE"
 echo "-----> Preparing Python Environment..."
 
 echo "---> Downloading Miniconda..."
-if [ ! -d $CACHE ]; then mkdir $CACHE; fi
+mkdir -p $CACHE
 $WGET -O $MINICONDA_CACHE $MINICONDA_URI
 chmod +x $MINICONDA_CACHE
 
@@ -67,3 +67,7 @@ mkdir -p $CONDA_STAGING
 cp -a $CONDA_HOME/* $CONDA_STAGING/
 
 echo "-----> Finished compile step"
+
+echo "-----> Create .profile.d"
+mkdir -p $HOME/.profile.d
+echo 'PATH=$PATH:$CONDA_HOME/bin' > $HOME/.profile.d/conda.sh

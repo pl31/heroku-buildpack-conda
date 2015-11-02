@@ -15,15 +15,4 @@
 # limitations under the License.
 #
 
-BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
-BUILD_DIR=$1
-CONDA_HOME="$BUILD_DIR/.conda"
-
-cat <<EOF
----
-addons:
-config_vars:
-- PATH: $PATH:$CONDA_HOME/bin
-default_process_types:
-EOF
-
+echo "--- {}"
