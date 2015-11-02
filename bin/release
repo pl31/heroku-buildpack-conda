@@ -23,7 +23,7 @@ cat <<EOF
 ---
 addons:
 config_vars:
-  PATH: $PATH:$CONDA_HOME/bin
+- PATH: $PATH:$CONDA_HOME/bin
 default_process_types:
 EOF
 
