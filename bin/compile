@@ -52,7 +52,7 @@ echo "---> Updating environment"
 $CONDA update --yes --quiet --all
 
 echo "-----> Installing Dependencies..."
-$CONDA env update -n root -f "$BUILD_DIR/environment.yml"
+$CONDA env update -n root -f "$ROOT/environment.yml"
 
 echo "-----> Cleaning Python Environment..."
 $CONDA clean --yes --tarballs
