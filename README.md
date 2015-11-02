@@ -1,4 +1,6 @@
-# IPython Notebook Buildpack
+# Heroku Anaconda Buildpack
+
+WORK IN PROGRESS
 
 The `ipython-notebook-buildpack` is a [Cloud Foundry][] buildpack for exposing [IPython Notebook][] files.
 

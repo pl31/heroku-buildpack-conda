@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+set -eo pipefail
+
 echo "-----> Starting compile step..."
 ROOT=$1
 CACHE=$2
@@ -22,7 +24,6 @@ BASH=$(which bash)
 WGET=$(which wget)
 CONDA_HOME="$HOME/app/.conda"
 CONDA="$CONDA_HOME/bin/conda"
-PIP="$CONDA_HOME/bin/pip"
 CONDA_STAGING="$1/.conda"
 
 if [ ! -e "$ROOT/conda_runtime.txt" ]; then
@@ -34,28 +35,24 @@ MINICONDA_URI="http://repo.continuum.io/miniconda/$MINICONDA_FILE"
 MINICONDA_CACHE="$CACHE/$MINICONDA_FILE"
 
 echo "-----> Preparing Python Environment..."
-if [ ! -e $MINICONDA_CACHE ] ; then
-	echo "-----> Downloading Miniconda..."
-	if [ ! -d $CACHE ]; then mkdir $CACHE; fi
-	$WGET -O $MINICONDA_CACHE $MINICONDA_URI
-	chmod +x $MINICONDA_CACHE
-fi
+
+echo "---> Downloading Miniconda..."
+if [ ! -d $CACHE ]; then mkdir $CACHE; fi
+$WGET -O $MINICONDA_CACHE $MINICONDA_URI
+chmod +x $MINICONDA_CACHE
+
+echo "---> Delete old files..." 
 if [ -e $CONDA_HOME ]; then rm -rf $CONDA_HOME; fi
-echo Installing anaconda to $CONDA_HOME
-$MINICONDA_CACHE -b -p $CONDA_HOME #&> /dev/null
-$CONDA update --yes --quiet --all #&> /dev/null
-$CONDA install --yes --quiet pip #&> /dev/null
+
+echo "---> Installing anaconda to $CONDA_HOME"
+$MINICONDA_CACHE -b -p $CONDA_HOME
+rm $MINICONDA_CACHE
+
+echo "---> Updating environment"
+$CONDA update --yes --quiet --all
 
 echo "-----> Installing Dependencies..."
-$CONDA install --yes --quiet ipython-notebook #&> /dev/null
-if [ -e "$ROOT/requirements.txt" ]; then
-    echo "-----> Installing additional requirements using conda..."
-	while read p; do 
-	    $CONDA install --yes --quiet $p #&> /dev/null
-	done <"$ROOT/requirements.txt"
-    echo "-----> Installing additional requirements using pip..."
-	$PIP install -r "$ROOT/requirements.txt"
-fi
+$CONDA env update -n root -f "$BUILD_DIR/environment.yml"
 
 echo "-----> Cleaning Python Environment..."
 $CONDA clean --yes --tarballs

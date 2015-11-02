@@ -15,15 +15,12 @@
 # limitations under the License.
 #
 
-ROOT="/home/vcap/app"
-CONDA_HOME="$ROOT/.conda"
+BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
+BUILD_DIR=$1
+CONDA_HOME="$BUILD_DIR/.conda"
 
-if [ -e "$1/additional_notebook_config.py" ]
-then
-    with_config="--config=$ROOT/additional_notebook_config.py"
-fi
-
-echo "
-default_process_types:
-  web: $CONDA_HOME/bin/ipython notebook --no-browser --no-mathjax --ip=* --port \$PORT $with_config
-"
+cat <<EOF
+---
+config_vars:
+  PATH=$PATH:$CONDA_HOME/bin
+EOF
