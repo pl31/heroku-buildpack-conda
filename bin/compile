@@ -17,58 +17,53 @@
 set -eo pipefail
 
 echo "-----> Starting compile step..."
-ROOT=$1
-CACHE=$2
+mkdir -p "$1" "$2"
+build=$(cd "$1/" && pwd)
+cache=$(cd "$2/" && pwd)
 
-BASH=$(which bash)
-WGET=$(which wget)
-CONDA_HOME="$HOME/.conda"
-CONDA="$CONDA_HOME/bin/conda"
-CONDA_STAGING="$1/.conda"
+conda_temp="$HOME/.conda"
+PATH=$PATH:$conda_temp
 
-if [ ! -e "$ROOT/conda_runtime.txt" ]; then
-	MINICONDA_FILE="Miniconda3-latest-Linux-x86_64.sh"
+if [ ! -e "$build/conda_runtime.txt" ]; then
+	conda_runtime="Miniconda3-latest-Linux-x86_64.sh"
 else
-	MINICONDA_FILE=$(cat "$ROOT/conda_runtime.txt")
+	conda_runtime=$(cat "$build/conda_runtime.txt")
 fi
-MINICONDA_URI="http://repo.continuum.io/miniconda/$MINICONDA_FILE"
-MINICONDA_CACHE="$CACHE/$MINICONDA_FILE"
+miniconda_installer="$cache/$conda_runtime"
 
 echo "-----> Preparing Python Environment..."
 
 echo "---> Downloading Miniconda..."
-mkdir -p $CACHE
-$WGET -O $MINICONDA_CACHE $MINICONDA_URI
-chmod +x $MINICONDA_CACHE
+wget -O $miniconda_installer "http://repo.continuum.io/miniconda/$conda_runtime"
+chmod +x $miniconda_installer
 
 echo "---> Delete old files..." 
-if [ -e $CONDA_HOME ]; then rm -rf $CONDA_HOME; fi
-if [ -e $CONDA_STAGING ]; then rm -rf $CONDA_STAGING; fi
+if [ -e $conda_temp ]; then rm -rf $conda_temp; fi
 
-echo "---> Installing anaconda to $CONDA_HOME"
-$MINICONDA_CACHE -b -p $CONDA_HOME
-rm $MINICONDA_CACHE
+echo "---> Installing conda to $conda_temp"
+$miniconda_installer -b -p $conda_temp
+rm $miniconda_installer
 
 echo "---> Updating environment"
-$CONDA update --yes --quiet --all
+conda update --yes --quiet --all
 
 echo "-----> Installing Dependencies..."
-$CONDA env update -n root -f "$ROOT/environment.yml"
+conda env update -n root -f "$build/environment.yml"
 
 echo "-----> Cleaning Python Environment..."
-$CONDA clean --yes --tarballs
+conda clean --yes --tarballs
 
 echo "-----> Listing Python Environment Information..."
-echo "---> conda list"
-$CONDA list
+conda list
 
 echo "-----> Copy to staging area"
-if [ -e $CONDA_STAGING ]; then rm -rf $CONDA_STAGING; fi
-mkdir -p $CONDA_STAGING
-cp -a $CONDA_HOME/* $CONDA_STAGING/
+conda_cache="$cache/.conda"
+if [ -e $conda_cache ]; then rm -rf $conda_cache; fi
+mkdir -p $conda_cache
+cp -a $conda_temp/* $conda_cache/
 
 echo "-----> Finished compile step"
 
 echo "-----> Create .profile.d"
-mkdir -p $ROOT/.profile.d
-echo 'PATH=$PATH:$HOME/.conda/bin' > $ROOT/.profile.d/conda.sh
+mkdir -p $build/.profile.d
+echo 'PATH=$PATH:$HOME/.conda/bin' > $build/.profile.d/conda.sh
