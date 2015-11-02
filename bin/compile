@@ -44,6 +44,8 @@ $miniconda_installer -b -p $conda_temp
 rm $miniconda_installer
 export PATH=$PATH:$conda_temp
 
+echo $PATH
+
 echo "---> Updating environment"
 conda update --yes --quiet --all
 
