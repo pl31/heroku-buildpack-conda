@@ -57,10 +57,10 @@ echo "-----> Listing Python Environment Information..."
 conda list
 
 echo "-----> Copy to staging area"
-conda_cache="$cache/.conda"
-if [ -e $conda_cache ]; then rm -rf $conda_cache; fi
-mkdir -p $conda_cache
-cp -a $conda_temp/* $conda_cache/
+conda_build="$build/.conda"
+if [ -e $conda_build ]; then rm -rf $conda_build; fi
+mkdir -p $conda_build
+cp -a $conda_temp/* $conda_build/
 
 echo "-----> Finished compile step"
 
