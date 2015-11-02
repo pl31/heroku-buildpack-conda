@@ -42,9 +42,7 @@ if [ -e $conda_temp ]; then rm -rf $conda_temp; fi
 echo "---> Installing conda to $conda_temp"
 $miniconda_installer -b -p $conda_temp
 rm $miniconda_installer
-export PATH=$PATH:$conda_temp
-
-echo $PATH
+export PATH=$PATH:$conda_temp/bin
 
 echo "---> Updating environment"
 conda update --yes --quiet --all
