@@ -50,6 +50,9 @@ conda update --yes --quiet --all
 echo "-----> Installing Dependencies..."
 conda env update -n root -f "$build/environment.yml"
 
+echo "-----> Cleaning Python Environment..."
+conda clean --yes --tarballs
+
 echo "-----> Listing Python Environment Information..."
 conda list
 
