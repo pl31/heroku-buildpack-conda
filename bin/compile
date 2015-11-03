@@ -66,11 +66,11 @@ echo "-----> Finished compile step"
 
 echo "-----> Create .profile.d"
 mkdir -p $build/.profile.d
-cat <<-'EOF' > $build/.profile.d/conda.sh
-  # append to path variable
-  export PATH=$PATH:$HOME/.conda/bin
-
-  # set default encoding to UTF-8
-  export LC_ALL=C.UTF-8
-  export LANG=C.UTF-8  
+	cat <<-'EOF' > $build/.profile.d/conda.sh
+	# append to path variable
+	export PATH=$PATH:$HOME/.conda/bin
+	
+	# set default encoding to UTF-8
+	export LC_ALL=C.UTF-8
+	export LANG=C.UTF-8  
 EOF
