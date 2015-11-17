@@ -22,6 +22,8 @@ build=$(cd "$1/" && pwd)
 cache=$(cd "$2/" && pwd)
 
 conda_temp="$HOME/.conda"
+# fix cloudfoundry path issues
+if [ "$HOME" == "/home/vcap" ]; then conda_temp="$HOME/app/.conda"; fi
 
 if [ ! -e "$build/conda_runtime.txt" ]; then
 	conda_runtime="Miniconda3-latest-Linux-x86_64.sh"
