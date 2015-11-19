@@ -35,7 +35,7 @@ miniconda_installer="$cache/$conda_runtime"
 echo "-----> Preparing Python Environment..."
 
 echo "---> Downloading Miniconda..."
-wget -O $miniconda_installer "http://repo.continuum.io/miniconda/$conda_runtime"
+wget -O $miniconda_installer "https://repo.continuum.io/miniconda/$conda_runtime"
 chmod +x $miniconda_installer
 
 echo "---> Delete old files..." 
