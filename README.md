@@ -9,6 +9,8 @@ Be aware that this buildpack uses `-b` option from miniconda installer:
              it is expected the license terms are agreed upon
 ```
 
+You can find the [license terms](http://docs.continuum.io/anaconda/eula) in the anaconda documentation.
+
 ## Conda Version
 
 Create a file named `conda_runtime.txt` containing the Miniconda version you wish to use as conda-runtime. Otherwise `Miniconda3-latest-Linux-x86_64.sh` (python 3.x) will be used.
