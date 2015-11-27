@@ -1,39 +1,23 @@
 # Heroku Anaconda Buildpack
 
-WORK IN PROGRESS
+`heroku-buildpack-conda` is a heroku and cloudfoundry builpack to deploy python using [continuum](https://www.continuum.io/)s anaconda. Latest miniconda installer is used from [here](https://repo.continuum.io/miniconda/).
 
-The `ipython-notebook-buildpack` is a [Cloud Foundry][] buildpack for exposing [IPython Notebook][] files.
+Be aware that this buildpack uses `-b` option from miniconda installer:
 
-## Usage
-To use this buildpack specify the URI of the repository when pushing an IPython Notebook file (or directory of files) to Cloud Foundry.
-
-    cf push --buildpack <https clone url>
-
-As the IPython notebook uses Websockets you must access it on Cloud Foundry using port 4443, e.g. https://app-subdomain.cfapps.io:4443
+```
+-b           run install in batch mode (without manual intervention),
+             it is expected the license terms are agreed upon
+```
 
 ## Conda Version
 
-Create a file named `conda_runtime.txt` containing the Miniconda version you wish to use as conda-runtime. Otherwise `Miniconda-latest-Linux-x86_64.sh` (python 2.x) will be used.
+Create a file named `conda_runtime.txt` containing the Miniconda version you wish to use as conda-runtime. Otherwise `Miniconda3-latest-Linux-x86_64.sh` (python 3.x) will be used.
 
-Find different runtimes here: http://repo.continuum.io/miniconda/
+Find different runtime versions here: http://repo.continuum.io/miniconda/
 
-Use `Miniconda3-3.7.3-Linux-x86_64.sh` for python 3.x support.
+## Environment
 
-## Notebook Dependencies
-The buildpack supports dependencies declaration using a `requirements.txt` file located in the root of the directory being pushed to Cloud Foundry.
-
-## Notebook Config
-Additional notebook configuration can be specified using a file named `additional_notebook_config.py` in the root of the app directory.
-
-In particular you can password protect your notebook server by creating a SHA1 hash of your password and adding this to the config file as follows:
-
-    # Password to use for web authentication
-    c = get_config()
-    c.NotebookApp.password =
-    u'sha1:85607904acb0:bd228c0989e8df2018d0777428b1bb974ba7d2c0'
-
-See [the IPython documentation](http://ipython.org/ipython-doc/stable/notebook/public_server.html) for further
-instructions and more configuration options for the server.
+Additional packages are installed using an `environment.yml` file. The environment name is ignored.
 
 ## License
 This buildpack is released under version 2.0 of the [Apache License](http://www.apache.org/licenses/LICENSE-2.0).
