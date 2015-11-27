@@ -21,5 +21,7 @@ Find different runtime versions here: http://repo.continuum.io/miniconda/
 
 Additional packages are installed using an `environment.yml` file. The environment name is ignored.
 
+Find an example [here](https://github.com/pl31/heroku-jupyter/blob/master/environment.yml).
+
 ## License
 This buildpack is released under version 2.0 of the [Apache License](http://www.apache.org/licenses/LICENSE-2.0).
