@@ -21,6 +21,3 @@ Additional packages are installed using an `environment.yml` file. The environme
 
 ## License
 This buildpack is released under version 2.0 of the [Apache License](http://www.apache.org/licenses/LICENSE-2.0).
-
-[Cloud Foundry]: http://www.cloudfoundry.com
-[IPython Notebook]: http://ipython.org/notebook.html
