@@ -71,6 +71,7 @@ mkdir -p $build/.profile.d
 	cat <<-'EOF' > $build/.profile.d/conda.sh
 	# append to path variable
 	export PATH=$HOME/.conda/bin:$PATH
+	source activate root
 	
 	# set default encoding to UTF-8
 	export LC_ALL=C.UTF-8
