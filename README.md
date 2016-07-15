@@ -19,7 +19,7 @@ Find different runtime versions here: http://repo.continuum.io/miniconda/
 
 ## Python version
 
-If you want to use a special python version, you should fix it in your environment.yml:
+If you want to use a special python version, you should set it in your environment.yml:
 
 ```
 name: root
