@@ -17,6 +17,17 @@ Create a file named `conda_runtime.txt` containing the Miniconda version you wis
 
 Find different runtime versions here: http://repo.continuum.io/miniconda/
 
+## Python version
+
+If you want to use a special python version, you should fix it in your environment.yml:
+
+```
+name: root
+dependencies:
+  - python=2.7
+  - ...
+```
+
 ## Environment
 
 Additional packages are installed using an `environment.yml` file. The environment name is ignored.
