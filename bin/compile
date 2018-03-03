@@ -50,7 +50,13 @@ echo "---> Updating environment"
 conda update --yes --quiet --all
 
 echo "-----> Installing Dependencies..."
-conda env update -n root -f "$build/environment.yml"
+# check $ENVIRONMENT_YML_PATH for alternative environment.yml
+if [ -z "$ENVIRONMENT_YML_PATH" ]; then 
+	environmentYMLPath="$build/environment.yml"
+else
+	environmentYMLPath="$build/$ENVIRONMENT_YML_PATH"
+fi
+conda env update -n root -f "$environmentYMLPath"
 
 echo "-----> Cleaning Python Environment..."
 conda clean --yes --tarballs
