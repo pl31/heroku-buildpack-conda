@@ -16,6 +16,13 @@
 #
 set -eo pipefail
 
+echo "-----> Retrieve environment variables"
+ENV_DIR=$3
+for KEY in ENVIRONMENT_YML_PATH; do
+  [ -f $ENV_DIR/$KEY ] && export "$KEY=$(cat $ENV_DIR/$KEY)"
+  [ -z "$ENVIRONMENT_YML_PATH" ] || echo "ENVIRONMENT_YML_PATH: $ENVIRONMENT_YML_PATH"
+done
+
 echo "-----> Starting compile step..."
 mkdir -p "$1" "$2"
 build=$(cd "$1/" && pwd)
