@@ -49,13 +49,13 @@ export PATH=$PATH:$conda_temp/bin
 echo "---> Updating environment"
 conda update --yes --quiet --all
 
-echo "-----> Installing Dependencies..."
 # check $ENVIRONMENT_YML_PATH for alternative environment.yml
 if [ -z "$ENVIRONMENT_YML_PATH" ]; then 
 	environmentYMLPath="$build/environment.yml"
 else
 	environmentYMLPath="$build/$ENVIRONMENT_YML_PATH"
 fi
+echo "-----> Installing Dependencies using $environmentYMLPath"
 conda env update -n root -f "$environmentYMLPath"
 
 echo "-----> Cleaning Python Environment..."
