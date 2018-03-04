@@ -73,7 +73,8 @@ echo "-----> Listing Python Environment Information..."
 conda list
 
 echo "-----> Add additional environment.yml..."
-if [ ! -z "$ADDITIONAL_ENVIRONMENT_YML" ]; then 
+if [ ! -z "$ADDITIONAL_ENVIRONMENT_YML" ]; then
+	source activate root
 	conda env create -f $ADDITIONAL_ENVIRONMENT_YML
 fi
 
