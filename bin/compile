@@ -66,9 +66,6 @@ fi
 echo "-----> Installing Dependencies using $environmentYMLPath"
 conda env update -n root -f "$environmentYMLPath"
 
-echo "-----> Cleaning Python Environment..."
-conda clean --yes --tarballs
-
 echo "-----> Listing Python Environment Information..."
 conda list
 
@@ -77,7 +74,10 @@ if [ ! -z "$ADDITIONAL_ENVIRONMENT_YML" ]; then
 	conda env create -f $build/$ADDITIONAL_ENVIRONMENT_YML
 fi
 
-echo "-----> Copy to staging area"
+echo "-----> Cleaning Python Environment..."
+conda clean --yes --tarballs
+
+echo "-----> Copy to staging area"L
 conda_build="$build/.conda"
 if [ -e $conda_build ]; then rm -rf $conda_build; fi
 mkdir -p $conda_build
