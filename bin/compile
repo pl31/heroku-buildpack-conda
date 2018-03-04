@@ -18,9 +18,9 @@ set -eo pipefail
 
 echo "-----> Retrieve environment variables"
 ENV_DIR=$3
-for KEY in ENVIRONMENT_YML_PATH; do
+for KEY in ENVIRONMENT_YML; do
   [ -f $ENV_DIR/$KEY ] && export "$KEY=$(cat $ENV_DIR/$KEY)"
-  [ -z "$ENVIRONMENT_YML_PATH" ] || echo "ENVIRONMENT_YML_PATH: $ENVIRONMENT_YML_PATH"
+  [ -z "$ENVIRONMENT_YML" ] || echo "ENVIRONMENT_YML: $ENVIRONMENT_YML"
 done
 
 echo "-----> Starting compile step..."
@@ -56,11 +56,11 @@ export PATH=$PATH:$conda_temp/bin
 echo "---> Updating environment"
 conda update --yes --quiet --all
 
-# check $ENVIRONMENT_YML_PATH for alternative environment.yml
-if [ -z "$ENVIRONMENT_YML_PATH" ]; then 
+# check $ENVIRONMENT_YML for alternative environment.yml
+if [ -z "$ENVIRONMENT_YML" ]; then 
 	environmentYMLPath="$build/environment.yml"
 else
-	environmentYMLPath="$build/$ENVIRONMENT_YML_PATH"
+	environmentYMLPath="$build/$ENVIRONMENT_YML"
 fi
 echo "-----> Installing Dependencies using $environmentYMLPath"
 conda env update -n root -f "$environmentYMLPath"
