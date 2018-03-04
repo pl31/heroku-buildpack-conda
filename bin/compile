@@ -18,10 +18,11 @@ set -eo pipefail
 
 echo "-----> Retrieve environment variables"
 ENV_DIR=$3
-for KEY in ENVIRONMENT_YML; do
-  [ -f $ENV_DIR/$KEY ] && export "$KEY=$(cat $ENV_DIR/$KEY)"
-  [ -z "$ENVIRONMENT_YML" ] || echo "ENVIRONMENT_YML: $ENVIRONMENT_YML"
+for KEY in ENVIRONMENT_YML ADDITIONAL_ENVIRONMENT_YML; do
+  [ -f $ENV_DIR/$KEY ] && export "$KEY=$(cat $ENV_DIR/$KEY)" 
 done
+[ -z "$ENVIRONMENT_YML" ] || echo "ENVIRONMENT_YML: $ENVIRONMENT_YML"
+[ -z "$ADDITIONAL_ENVIRONMENT_YML" ] || echo "ADDITIONAL_ENVIRONMENT_YML: $ADDITIONAL_ENVIRONMENT_YML"
 
 echo "-----> Starting compile step..."
 mkdir -p "$1" "$2"
@@ -70,6 +71,11 @@ conda clean --yes --tarballs
 
 echo "-----> Listing Python Environment Information..."
 conda list
+
+echo "-----> Add additional environment.yml..."
+if [ ! -z "$ADDITIONAL_ENVIRONMENT_YML" ]; then 
+	conda env create -f $ADDITIONAL_ENVIRONMENT_YML
+fi
 
 echo "-----> Copy to staging area"
 conda_build="$build/.conda"
