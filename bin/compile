@@ -74,8 +74,7 @@ conda list
 
 echo "-----> Add additional environment.yml..."
 if [ ! -z "$ADDITIONAL_ENVIRONMENT_YML" ]; then
-	source activate root
-	conda env create -f $ADDITIONAL_ENVIRONMENT_YML
+	conda env create -f $build/$ADDITIONAL_ENVIRONMENT_YML
 fi
 
 echo "-----> Copy to staging area"
